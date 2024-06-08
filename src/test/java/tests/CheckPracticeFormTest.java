@@ -5,17 +5,14 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 /**
  * Тест проверяет заполнение формы регистрации студента и получение результатов отправки
  */
-public class TestCheckPracticeForm {
+public class CheckPracticeFormTest {
 
     @BeforeAll
     public static void settingsTest() {
@@ -25,11 +22,13 @@ public class TestCheckPracticeForm {
     }
 
     @Test
-    public void testCheckPracticeForm() {
+    public void сheckingPracticeFormTest() {
         /*
           Заполняем форму регистрации студента
          */
         open("/automation-practice-form");
+        executeJavaScript("$('footer').remove();");
+        executeJavaScript("$('#fixedban').remove();");
         $("#firstName").setValue("Aleksandr");
         $("#lastName").setValue("Aleksandrov");
         $("#userEmail").setValue("aleksandrov@aleks.com");
@@ -42,7 +41,7 @@ public class TestCheckPracticeForm {
         $(".practice-form-wrapper").click();
         $("#subjectsInput").setValue("Computer Science").pressEnter();
         $("#hobbiesWrapper").$(byText("Music")).click();
-        $("#uploadPicture").uploadFile(new File("src/test/resources/images/Wood.jpg"));
+        $("#uploadPicture").uploadFromClasspath("Wood.jpg");
         $("#stateCity-wrapper").scrollTo();
         $("#currentAddress").setValue("Aleksandrov street");
         $("#state").click();
