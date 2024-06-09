@@ -1,4 +1,4 @@
-package tests;
+package homework_3;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
