@@ -13,9 +13,6 @@ public class CalendarWidget {
     private final SelenideElement calendarMonth = $(".react-datepicker__month-select");
     private final SelenideElement calendarYear = $(".react-datepicker__year-select");
 
-    /**
-     * Выбирает дату в календаре
-     */
     public void setDate(String day, String month, String year) {
         calendarMonth.selectOption(month);
         calendarYear.selectOption(year);

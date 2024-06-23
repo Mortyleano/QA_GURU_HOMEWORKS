@@ -12,20 +12,14 @@ public class ModalWidget {
     private final SelenideElement modalTitle = $("#example-modal-sizes-title-lg");
     private final SelenideElement modalWindowWithResults = $(".table-responsive");
 
-    /**
-     * Проверяет результат формы регистрации студента
-     */
     public ModalWidget checkResultRegistrationForm(String key, String value) {
-        modalWindow.should(appear.because("Не отображается модальное окно"));
-        modalTitle.shouldHave(text("Thanks for submitting the form").because("Не отображается заголовок модального окна"));
-        modalWindowWithResults.$(byText(key)).parent().shouldHave(text(value).because("Отсутствует введенный параметр"));
+        modalWindow.should(appear);
+        modalTitle.shouldHave(text("Thanks for submitting the form"));
+        modalWindowWithResults.$(byText(key)).parent().shouldHave(text(value));
         return this;
     }
 
-    /**
-     * Проверяет, что модальное окно не появилось после ввода невалидных данных в форму регистрации студента
-     */
     public void modalWindowNotExist() {
-        modalWindow.shouldNotBe(exist.because("Модальное окно появилось после ввода невалидных данных"));
+        modalWindow.shouldNotBe(exist);
     }
 }

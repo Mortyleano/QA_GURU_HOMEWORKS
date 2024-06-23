@@ -1,7 +1,6 @@
 package tests.demoqa;
 
 import org.junit.jupiter.api.Test;
-import pages.Base;
 import pages.RegistrationPage;
 import pages.components.ModalWidget;
 
@@ -10,11 +9,12 @@ import static pages.RegistrationPage.Gender.Female;
 /**
  * Тест проверяет минимальное количество введенных данных в форме регистрации
  */
-public class CheckMinimalDataEntryTest extends Base {
+public class CheckMinimalDataEntryTest extends TestBase {
 
     @Test
     public void checkingMinimalDataEntryTest() {
         new RegistrationPage().openRegistrationPage()
+                .removeBanner()
                 .setFirstName("Aleksandra")
                 .setLastName("Aleksandrova")
                 .setUserGender(Female)

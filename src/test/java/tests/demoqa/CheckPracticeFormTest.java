@@ -1,7 +1,6 @@
 package tests.demoqa;
 
 import org.junit.jupiter.api.Test;
-import pages.Base;
 import pages.RegistrationPage;
 import pages.components.ModalWidget;
 
@@ -10,11 +9,12 @@ import static pages.RegistrationPage.Gender.Male;
 /**
  * Тест проверяет заполнение формы регистрации студента и получение результатов отправки
  */
-public class CheckPracticeFormTest extends Base {
+public class CheckPracticeFormTest extends TestBase {
 
     @Test
     public void checkingPracticeFormTest() {
         new RegistrationPage().openRegistrationPage()
+                .removeBanner()
                 .setFirstName("Aleksandr")
                 .setLastName("Aleksandrov")
                 .setUserEmail("aleksandrov@aleks.com")

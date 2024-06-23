@@ -20,65 +20,47 @@ public class TextBoxPage {
     private final SelenideElement outputCurrentAddress = $("#output #currentAddress");
     private final SelenideElement outputPermanentAddress = $("#output #permanentAddress");
 
-    /**
-     * Открывает страницу с обычными текстовыми формами
-     */
     public TextBoxPage openTextBoxPage() {
         open("/text-box");
-        titlePage.shouldHave(text("Text Box").because("Не отображается заголовок страницы"));
-        executeJavaScript("$('footer').remove();");
-        executeJavaScript("$('#fixedban').remove();");
+        titlePage.shouldHave(text("Text Box"));
         return this;
     }
 
+    public TextBoxPage removeBanner() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        return this;
+    }
 
-    /**
-     * Устанавливает полное имя пользователя в поле ввода
-     */
     public TextBoxPage setFullName(String fullName) {
-        fullNameInput.shouldBe(visible.because("Отсуствует поле ввода для полного имени")).setValue(fullName);
+        fullNameInput.shouldBe(visible).setValue(fullName);
         return this;
     }
 
-    /**
-     * Устанавливает электронную почту пользователя в поле ввода
-     */
     public TextBoxPage setUserEmail(String userEmail) {
-        userEmailInput.shouldBe(visible.because("Отсуствует поле ввода для эл.почты пользователя")).setValue(userEmail);
+        userEmailInput.shouldBe(visible).setValue(userEmail);
         return this;
     }
 
-    /**
-     * Устанавливает текущий адрес пользователя в поле ввода
-     */
     public TextBoxPage setCurrentAddress(String currentAddress) {
-        currentAddressInput.shouldBe(visible.because("Отсуствует поле ввода текущего адреса")).setValue(currentAddress);
+        currentAddressInput.shouldBe(visible).setValue(currentAddress);
         return this;
     }
 
-    /**
-     * Устанавливает постоянный адрес пользователя в поле ввода
-     */
     public TextBoxPage setPermanentAddress(String permanentAddress) {
-        permanentAddressInput.shouldBe(visible.because("Отсуствует поле ввода постоянного адреса")).setValue(permanentAddress);
+        permanentAddressInput.shouldBe(visible).setValue(permanentAddress);
         return this;
     }
 
-    /**
-     * Подтверждает и отправляет данные в блок вывода
-     */
     public TextBoxPage submitTextBoxForm() {
-        submitButton.shouldBe(visible.because("Отсутствует кнопка для отправки данных")).click();
+        submitButton.shouldBe(visible).click();
         return this;
     }
 
-    /**
-     * Проверяет полученные данные после подтверждения
-     */
     public void checkResultOutputBox(String fullName, String email, String currentAddress, String permanentAddress) {
-        outputName.shouldHave(text(fullName).because("Отсутствует введенное имя пользователя"));
-        outputEmail.shouldHave(text(email).because("Отсутствует введенная эл.почта пользователя"));
-        outputCurrentAddress.shouldHave(text(currentAddress).because("Отсутствует введенный текущий адрес пользователя"));
-        outputPermanentAddress.shouldHave(text(permanentAddress).because("Отсутствует введенный постоянный адрес пользователя"));
+        outputName.shouldHave(text(fullName));
+        outputEmail.shouldHave(text(email));
+        outputCurrentAddress.shouldHave(text(currentAddress));
+        outputPermanentAddress.shouldHave(text(permanentAddress));
     }
 }

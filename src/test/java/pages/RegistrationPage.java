@@ -31,122 +31,82 @@ public class RegistrationPage {
         Other
     }
 
-    /**
-     * Открывает страницу регистрации студента и закрывает все баннеры на ней
-     */
     public RegistrationPage openRegistrationPage() {
         open("/automation-practice-form");
-        practiceFormWrapper.shouldHave(text("Student Registration Form").because("Не открылся сайт"));
-        executeJavaScript("$('footer').remove();");
-        executeJavaScript("$('#fixedban').remove();");
+        practiceFormWrapper.shouldHave(text("Student Registration Form"));
         return this;
     }
 
-    /**
-     * Устанавливает имя студента в поле ввода
-     */
+    public RegistrationPage removeBanner() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        return this;
+    }
+
     public RegistrationPage setFirstName(String firstName) {
-        firstNameInput.shouldBe(visible.because("Отсуствует поле ввода для имени студента")).setValue(firstName);
+        firstNameInput.shouldBe(visible).setValue(firstName);
         return this;
     }
 
-    /**
-     * Устанавливает фамилию студента в поле ввода
-     */
     public RegistrationPage setLastName(String lastName) {
-        lastNameInput.shouldBe(visible.because("Отсуствует поле ввода для фамилии студента")).setValue(lastName);
+        lastNameInput.shouldBe(visible).setValue(lastName);
         return this;
     }
 
-    /**
-     * Устанавливает электронную почту студента в поле ввода
-     */
     public RegistrationPage setUserEmail(String userEmail) {
-        userEmailInput.shouldBe(visible.because("Отсуствует поле ввода для эл.почты студента")).setValue(userEmail);
+        userEmailInput.shouldBe(visible).setValue(userEmail);
         return this;
     }
 
-    /**
-     * Устанавливает номер телефона студента в поле ввода
-     */
     public RegistrationPage setUserNumber(String userNumber) {
-        userNumberInput.shouldBe(visible.because("Отсуствует поле ввода для номера телефона студента")).setValue(userNumber);
+        userNumberInput.shouldBe(visible).setValue(userNumber);
         return this;
     }
 
-    /**
-     * Выбирает гендер студента
-     */
     public RegistrationPage setUserGender(Gender userGender) {
-        genderWrapper
-                .shouldBe(visible.because("Отсуствует радио-кнопка для выбора гендера"))
-                .$(byText(userGender.toString())).click();
+        genderWrapper.shouldBe(visible).$(byText(userGender.toString())).click();
         return this;
     }
 
-    /**
-     * Выбирает дату рождения студента в календаре
-     */
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
-        calendarInput.shouldBe(visible.because("Отсуствует календарь для выбора даты рождения студента")).click();
+        calendarInput.shouldBe(visible).click();
         new CalendarWidget().setDate(day, month, year);
         return this;
     }
 
-    /**
-     * Выбирает предмет изучения студента
-     */
     public RegistrationPage setSubject(String subject) {
-        subjectInput.shouldBe(visible.because("Отсуствует поле предмета изучения для выбора")).setValue(subject).pressEnter();
+        subjectInput.shouldBe(visible).setValue(subject).pressEnter();
         return this;
     }
 
-    /**
-     * Выбирает хобби студента
-     */
     public RegistrationPage setHobby(String hobby) {
-        hobbyWrapper.shouldBe(visible.because("Отсуствует хобби для выбора")).$(byText(hobby)).click();
+        hobbyWrapper.shouldBe(visible).$(byText(hobby)).click();
         return this;
     }
 
-    /**
-     * Загружает файл с картинкой
-     */
     public RegistrationPage uploadPictureFile(String fileName) {
-        uploadPictureButton.shouldBe(visible.because("Отсуствует кнопка загрузки картинки")).uploadFromClasspath(fileName);
+        uploadPictureButton.shouldBe(visible).uploadFromClasspath(fileName);
         return this;
     }
 
-    /**
-     * Устанавливает текущий адрес студента в поле ввода
-     */
     public RegistrationPage setCurrentAddress(String currentAddress) {
-        currentAddressInput.shouldBe(visible.because("Отсуствует поле ввода текущего адреса")).setValue(currentAddress);
+        currentAddressInput.shouldBe(visible).setValue(currentAddress);
         return this;
     }
 
-    /**
-     * Устанавливает текущий штат, где проживает студент
-     */
     public RegistrationPage setState(String state) {
         stateInput.click();
-        stateAndCityWrapper.shouldHave(text(state).because("В списке отсутствует выбранный штат")).$(byText(state)).click();
+        stateAndCityWrapper.shouldHave(text(state)).$(byText(state)).click();
         return this;
     }
 
-    /**
-     * Устанавливает текущий город, где проживает студент
-     */
     public RegistrationPage setCity(String city) {
         cityInput.click();
-        stateAndCityWrapper.shouldHave(text(city).because("В списке отсутствует выбранный город")).$(byText(city)).click();
+        stateAndCityWrapper.shouldHave(text(city)).$(byText(city)).click();
         return this;
     }
 
-    /**
-     * Подтверждает и отправляет заполненную форму регистрации студента
-     */
     public void submitRegistrationForm() {
-        submitButton.shouldBe(visible.because("Отсутствует кнопка для подтверждения регистрации")).click();
+        submitButton.shouldBe(visible).click();
     }
 }
