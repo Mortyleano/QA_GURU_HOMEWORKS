@@ -25,12 +25,6 @@ public class RegistrationPage {
     private final SelenideElement stateAndCityWrapper = $("#stateCity-wrapper");
     private final SelenideElement submitButton = $("#submit");
 
-    public enum Gender {
-        Male,
-        Female,
-        Other
-    }
-
     public RegistrationPage openRegistrationPage() {
         open("/automation-practice-form");
         practiceFormWrapper.shouldHave(text("Student Registration Form"));
@@ -63,8 +57,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setUserGender(Gender userGender) {
-        genderWrapper.shouldBe(visible).$(byText(userGender.toString())).click();
+    public RegistrationPage setUserGender(String userGender) {
+        genderWrapper.shouldBe(visible).$(byText(userGender)).click();
         return this;
     }
 

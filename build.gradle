@@ -12,6 +12,7 @@ compileTestJava {
 
 dependencies {
     testImplementation (
+            'com.github.javafaker:javafaker:1.0.2',
             "org.junit.jupiter:junit-jupiter:5.10.0",
             'org.assertj:assertj-core:3.24.2',
             "com.codeborne:selenide:7.3.2",

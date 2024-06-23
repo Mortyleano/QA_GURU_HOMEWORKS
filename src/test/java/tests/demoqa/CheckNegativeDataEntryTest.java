@@ -3,22 +3,21 @@ package tests.demoqa;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.ModalWidget;
-
-import static pages.RegistrationPage.Gender.Other;
+import tests.utils.RandomUtils;
 
 /**
- * Тест проверяет ввод невалидных данных в форме регистрации студента
+ * Тест проверяет вывод ошибки в форме регистрации студента при отсутствии введенного номера телефона
  */
 public class CheckNegativeDataEntryTest extends TestBase {
 
     @Test
     public void checkingNegativeDataEntryTest() {
+        RandomUtils randomUtils = new RandomUtils();
         new RegistrationPage().openRegistrationPage()
                 .removeBanner()
-                .setFirstName("Nobody")
-                .setLastName("Nothing")
-                .setUserGender(Other)
-                .setUserNumber("012345678")
+                .setFirstName(randomUtils.firstName)
+                .setLastName(randomUtils.lastName)
+                .setUserGender(randomUtils.userGender)
                 .submitRegistrationForm();
 
         new ModalWidget().modalWindowNotExist();

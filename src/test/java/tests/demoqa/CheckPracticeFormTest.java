@@ -3,8 +3,9 @@ package tests.demoqa;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.ModalWidget;
+import tests.utils.RandomUtils;
 
-import static pages.RegistrationPage.Gender.Male;
+import static pages.components.ModalWidget.*;
 
 /**
  * Тест проверяет заполнение формы регистрации студента и получение результатов отправки
@@ -13,31 +14,35 @@ public class CheckPracticeFormTest extends TestBase {
 
     @Test
     public void checkingPracticeFormTest() {
+        RandomUtils randomUtils = new RandomUtils();
         new RegistrationPage().openRegistrationPage()
                 .removeBanner()
-                .setFirstName("Aleksandr")
-                .setLastName("Aleksandrov")
-                .setUserEmail("aleksandrov@aleks.com")
-                .setUserGender(Male)
-                .setUserNumber("0123456789")
-                .setDateOfBirth("9", "April", "1996")
-                .setSubject("Computer Science")
-                .setHobby("Music")
-                .uploadPictureFile("Wood.jpg")
-                .setCurrentAddress("Aleksandrov street")
-                .setState("Haryana")
-                .setCity("Karnal")
+                .setFirstName(randomUtils.firstName)
+                .setLastName(randomUtils.lastName)
+                .setUserEmail(randomUtils.userEmail)
+                .setUserGender(randomUtils.userGender)
+                .setUserNumber(randomUtils.userNumber)
+                .setDateOfBirth(randomUtils.dayOfBirth, randomUtils.monthOfBirth, randomUtils.yearOfBirth)
+                .setSubject(randomUtils.userSubject)
+                .setHobby(randomUtils.userHobby)
+                .uploadPictureFile(randomUtils.userFile)
+                .setCurrentAddress(randomUtils.userCurrentAddress)
+                .setState(randomUtils.state)
+                .setCity(randomUtils.city)
                 .submitRegistrationForm();
 
-        new ModalWidget().checkResultRegistrationForm("Student Name", "Aleksandr Aleksandrov")
-                .checkResultRegistrationForm("Student Email", "aleksandrov@aleks.com")
-                .checkResultRegistrationForm("Gender", "Male")
-                .checkResultRegistrationForm("Mobile", "0123456789")
-                .checkResultRegistrationForm("Date of Birth", "09 April,1996")
-                .checkResultRegistrationForm("Subjects", "Computer Science")
-                .checkResultRegistrationForm("Hobbies", "Music")
-                .checkResultRegistrationForm("Picture", "Wood.jpg")
-                .checkResultRegistrationForm("Address", "Aleksandrov street")
-                .checkResultRegistrationForm("State and City", "Haryana Karnal");
+        new ModalWidget().checkResultRegistrationForm(MODAL_STUDENT_NAME, randomUtils.firstName + " " + randomUtils.lastName)
+                .checkResultRegistrationForm(MODAL_STUDENT_EMAIL, randomUtils.userEmail)
+                .checkResultRegistrationForm(MODAL_STUDENT_GENDER, randomUtils.userGender)
+                .checkResultRegistrationForm(MODAL_STUDENT_MOBILE, randomUtils.userNumber)
+                .checkResultRegistrationForm(MODAL_STUDENT_DATE_OF_BIRTH, randomUtils.dayOfBirth + " "
+                        + randomUtils.monthOfBirth + ","
+                        + randomUtils.yearOfBirth
+                )
+                .checkResultRegistrationForm(MODAL_STUDENT_SUBJECT, randomUtils.userSubject)
+                .checkResultRegistrationForm(MODAL_STUDENT_HOBBIES, randomUtils.userHobby)
+                .checkResultRegistrationForm(MODAL_STUDENT_PICTURE, randomUtils.userFile)
+                .checkResultRegistrationForm(MODAL_STUDENT_ADDRESS, randomUtils.userCurrentAddress)
+                .checkResultRegistrationForm(MODAL_STUDENT_STATE_AND_CITY, randomUtils.state + " " + randomUtils.city);
     }
 }

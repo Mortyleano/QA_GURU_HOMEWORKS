@@ -3,8 +3,9 @@ package tests.demoqa;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.ModalWidget;
+import tests.utils.RandomUtils;
 
-import static pages.RegistrationPage.Gender.Female;
+import static pages.components.ModalWidget.*;
 
 /**
  * Тест проверяет минимальное количество введенных данных в форме регистрации
@@ -13,18 +14,22 @@ public class CheckMinimalDataEntryTest extends TestBase {
 
     @Test
     public void checkingMinimalDataEntryTest() {
+        RandomUtils randomUtils = new RandomUtils();
         new RegistrationPage().openRegistrationPage()
                 .removeBanner()
-                .setFirstName("Aleksandra")
-                .setLastName("Aleksandrova")
-                .setUserGender(Female)
-                .setUserNumber("0123456789")
-                .setDateOfBirth("9", "April", "1996")
+                .setFirstName(randomUtils.firstName)
+                .setLastName(randomUtils.lastName)
+                .setUserGender(randomUtils.userGender)
+                .setUserNumber(randomUtils.userNumber)
+                .setDateOfBirth(randomUtils.dayOfBirth, randomUtils.monthOfBirth, randomUtils.yearOfBirth)
                 .submitRegistrationForm();
 
-        new ModalWidget().checkResultRegistrationForm("Student Name", "Aleksandra Aleksandrova")
-                .checkResultRegistrationForm("Gender", "Female")
-                .checkResultRegistrationForm("Mobile", "0123456789")
-                .checkResultRegistrationForm("Date of Birth", "09 April,1996");
+        new ModalWidget().checkResultRegistrationForm(MODAL_STUDENT_NAME, randomUtils.firstName + " " + randomUtils.lastName)
+                .checkResultRegistrationForm(MODAL_STUDENT_GENDER, randomUtils.userGender)
+                .checkResultRegistrationForm(MODAL_STUDENT_MOBILE, randomUtils.userNumber)
+                .checkResultRegistrationForm(MODAL_STUDENT_DATE_OF_BIRTH, randomUtils.dayOfBirth + " "
+                        + randomUtils.monthOfBirth + ","
+                        + randomUtils.yearOfBirth
+                );
     }
 }
