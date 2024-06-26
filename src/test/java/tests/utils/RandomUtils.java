@@ -8,7 +8,6 @@ import java.time.Year;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomUtils {
 
@@ -20,7 +19,7 @@ public class RandomUtils {
     public String userEmail = faker.internet().emailAddress();
     public String userCurrentAddress = faker.address().fullAddress();
     public String userPermanentAddress = faker.address().fullAddress();
-    public String userNumber = getRandomPhone();
+    public String userNumber = faker.number().digits(10);
     public String userGender = getRandomGender();
     public String userHobby = getRandomHobby();
     public String userSubject = getRandomSubject();
@@ -33,31 +32,14 @@ public class RandomUtils {
 
     private String selectedState;
 
-    public int getRandomInt(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(min, max + 1);
-    }
-
-    public long getRandomLong(long min, long max) {
-        return ThreadLocalRandom.current().nextLong(min, max + 1);
-    }
-
-    public String getRandomItemFromArray(String[] array) {
-        int index = getRandomInt(0, array.length - 1);
-        return array[index];
-    }
-
     public String getRandomGender() {
         String[] genders = {"Male", "Female", "Other"};
-        return getRandomItemFromArray(genders);
-    }
-
-    public String getRandomPhone() {
-        return String.format("%s", getRandomLong(1111111111, 9999999999L));
+        return faker.options().option(genders);
     }
 
     public String getRandomHobby() {
         String[] hobbies = {"Sports", "Reading", "Music"};
-        return getRandomItemFromArray(hobbies);
+        return faker.options().option(hobbies);
     }
 
     public String getRandomSubject() {
@@ -67,12 +49,12 @@ public class RandomUtils {
                 "Social Studies", "Accounting", "Physics", "Biology",
                 "Hindi", "Civics"
         };
-        return getRandomItemFromArray(subjects);
+        return faker.options().option(subjects);
     }
 
     public String getRandomState() {
         String[] states = {"NCR", "Uttar Pradesh", "Haryana", "Rajasthan"};
-        selectedState = getRandomItemFromArray(states);
+        selectedState = faker.options().option(states);
         return selectedState;
     }
 
@@ -85,12 +67,12 @@ public class RandomUtils {
         stateCityMap.put("Uttar Pradesh", new String[]{"Agra", "Lucknow", "Merrut"});
         stateCityMap.put("Haryana", new String[]{"Karnal", "Panipat"});
         stateCityMap.put("Rajasthan", new String[]{"Jaipur", "Jaiselmer"});
-        return getRandomItemFromArray(stateCityMap.get(selectedState));
+        return faker.options().option(stateCityMap.get(selectedState));
     }
 
     public String getRandomFile() {
         String[] files = {"Test-1.jpg", "Test-2.jpg", "Test-3.jpg"};
-        return getRandomItemFromArray(files);
+        return faker.options().option(files);
     }
 
     public String[] generateRandomDate() {
