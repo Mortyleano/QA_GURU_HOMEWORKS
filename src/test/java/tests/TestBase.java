@@ -1,22 +1,22 @@
-package tests.demoqa;
+package tests;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
-    @BeforeAll
-    public static void settingsTest() {
+    @BeforeEach
+    public void settingsTest() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
     }
 
     @AfterEach
-    public void afterEach() {
+    public void settingsAfterTest() {
         closeWebDriver();
     }
 }

@@ -1,16 +1,17 @@
-package tests.demoqa;
+package tests;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.ModalWidget;
 import tests.utils.RandomUtils;
 
-/**
- * Тест проверяет вывод ошибки в форме регистрации студента при отсутствии введенного номера телефона
- */
 public class CheckNegativeDataEntryTest extends TestBase {
 
     @Test
+    @Tag("smoke") @Tag("registration")
+    @DisplayName("Проверяет вывод ошибки в форме регистрации студента при отсутствии введенного номера телефона")
     public void checkingNegativeDataEntryTest() {
         RandomUtils randomUtils = new RandomUtils();
         new RegistrationPage().openRegistrationPage()

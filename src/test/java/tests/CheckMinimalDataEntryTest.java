@@ -1,31 +1,32 @@
-package tests.demoqa;
+package tests;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import pages.RegistrationPage;
 import pages.components.ModalWidget;
 import tests.utils.RandomUtils;
 
 import static pages.components.ModalWidget.*;
 
-/**
- * Тест проверяет минимальное количество введенных данных в форме регистрации
- */
 public class CheckMinimalDataEntryTest extends TestBase {
 
-    @Test
-    public void checkingMinimalDataEntryTest() {
+    @Tag("smoke") @Tag("registration")
+    @CsvSource(value = {"Ivan, Male", "Anna, Female"})
+    @ParameterizedTest(name = "Проверяет минимальный ввод данных в форме регистрации с именем {0} и полом {1}")
+    public void checkingMinimalDataEntryTest(String userFirstName, String userGender) {
         RandomUtils randomUtils = new RandomUtils();
         new RegistrationPage().openRegistrationPage()
                 .removeBanner()
-                .setFirstName(randomUtils.firstName)
+                .setFirstName(userFirstName)
                 .setLastName(randomUtils.lastName)
-                .setUserGender(randomUtils.userGender)
+                .setUserGender(userGender)
                 .setUserNumber(randomUtils.userNumber)
                 .setDateOfBirth(randomUtils.dayOfBirth, randomUtils.monthOfBirth, randomUtils.yearOfBirth)
                 .submitRegistrationForm();
 
-        new ModalWidget().checkResultRegistrationForm(MODAL_STUDENT_NAME, randomUtils.firstName + " " + randomUtils.lastName)
-                .checkResultRegistrationForm(MODAL_STUDENT_GENDER, randomUtils.userGender)
+        new ModalWidget().checkResultRegistrationForm(MODAL_STUDENT_NAME, userFirstName + " " + randomUtils.lastName)
+                .checkResultRegistrationForm(MODAL_STUDENT_GENDER, userGender)
                 .checkResultRegistrationForm(MODAL_STUDENT_MOBILE, randomUtils.userNumber)
                 .checkResultRegistrationForm(MODAL_STUDENT_DATE_OF_BIRTH, randomUtils.dayOfBirth + " "
                         + randomUtils.monthOfBirth + ","

@@ -1,19 +1,20 @@
-package tests.demoqa;
+package tests;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import pages.RegistrationPage;
 import pages.components.ModalWidget;
 import tests.utils.RandomUtils;
 
 import static pages.components.ModalWidget.*;
 
-/**
- * Тест проверяет заполнение формы регистрации студента и получение результатов отправки
- */
 public class CheckPracticeFormTest extends TestBase {
 
-    @Test
-    public void checkingPracticeFormTest() {
+    @Tag("smoke") @Tag("registration")
+    @ValueSource(strings = {"9091112233", "9092223344"})
+    @ParameterizedTest(name = "Тест проверяет заполнение формы регистрации студента с моб.номером {0}")
+    public void checkingPracticeFormTest(String userNumber) {
         RandomUtils randomUtils = new RandomUtils();
         new RegistrationPage().openRegistrationPage()
                 .removeBanner()
@@ -21,7 +22,7 @@ public class CheckPracticeFormTest extends TestBase {
                 .setLastName(randomUtils.lastName)
                 .setUserEmail(randomUtils.userEmail)
                 .setUserGender(randomUtils.userGender)
-                .setUserNumber(randomUtils.userNumber)
+                .setUserNumber(userNumber)
                 .setDateOfBirth(randomUtils.dayOfBirth, randomUtils.monthOfBirth, randomUtils.yearOfBirth)
                 .setSubject(randomUtils.userSubject)
                 .setHobby(randomUtils.userHobby)
@@ -34,7 +35,7 @@ public class CheckPracticeFormTest extends TestBase {
         new ModalWidget().checkResultRegistrationForm(MODAL_STUDENT_NAME, randomUtils.firstName + " " + randomUtils.lastName)
                 .checkResultRegistrationForm(MODAL_STUDENT_EMAIL, randomUtils.userEmail)
                 .checkResultRegistrationForm(MODAL_STUDENT_GENDER, randomUtils.userGender)
-                .checkResultRegistrationForm(MODAL_STUDENT_MOBILE, randomUtils.userNumber)
+                .checkResultRegistrationForm(MODAL_STUDENT_MOBILE, userNumber)
                 .checkResultRegistrationForm(MODAL_STUDENT_DATE_OF_BIRTH, randomUtils.dayOfBirth + " "
                         + randomUtils.monthOfBirth + ","
                         + randomUtils.yearOfBirth
