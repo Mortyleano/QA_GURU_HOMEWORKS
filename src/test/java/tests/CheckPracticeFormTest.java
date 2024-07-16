@@ -14,7 +14,7 @@ public class CheckPracticeFormTest extends TestBase {
     @Tag("smoke") @Tag("registration")
     @ValueSource(strings = {"9091112233", "9092223344"})
     @ParameterizedTest(name = "Тест проверяет заполнение формы регистрации студента с моб.номером {0}")
-    public void checkingPracticeFormTest(String userNumber) {
+    void checkingPracticeFormTest(String userNumber) {
         RandomUtils randomUtils = new RandomUtils();
         new RegistrationPage().openRegistrationPage()
                 .removeBanner()

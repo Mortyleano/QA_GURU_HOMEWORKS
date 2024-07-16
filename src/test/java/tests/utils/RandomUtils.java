@@ -71,7 +71,7 @@ public class RandomUtils {
     }
 
     public String getRandomFile() {
-        String[] files = {"Test-1.jpg", "Test-2.jpg", "Test-3.jpg"};
+        String[] files = {"images/Test-1.jpg", "images/Test-2.jpg", "images/Test-3.jpg"};
         return faker.options().option(files);
     }
 

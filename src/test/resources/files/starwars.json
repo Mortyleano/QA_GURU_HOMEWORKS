@@ -1,0 +1,19 @@
+{
+  "characters": [
+    {
+      "name": "Luke Skywalker",
+      "role": "Jedi Knight",
+      "homeworld": "Tatooine"
+    },
+    {
+      "name": "Darth Vader",
+      "role": "Sith Lord",
+      "homeworld": "Tatooine"
+    },
+    {
+      "name": "Leia Organa",
+      "role": "Princess",
+      "homeworld": "Alderaan"
+    }
+  ]
+}

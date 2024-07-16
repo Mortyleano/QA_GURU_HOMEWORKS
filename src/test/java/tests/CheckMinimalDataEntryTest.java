@@ -14,7 +14,7 @@ public class CheckMinimalDataEntryTest extends TestBase {
     @Tag("smoke") @Tag("registration")
     @CsvSource(value = {"Ivan, Male", "Anna, Female"})
     @ParameterizedTest(name = "Проверяет минимальный ввод данных в форме регистрации с именем {0} и полом {1}")
-    public void checkingMinimalDataEntryTest(String userFirstName, String userGender) {
+    void checkingMinimalDataEntryTest(String userFirstName, String userGender) {
         RandomUtils randomUtils = new RandomUtils();
         new RegistrationPage().openRegistrationPage()
                 .removeBanner()
