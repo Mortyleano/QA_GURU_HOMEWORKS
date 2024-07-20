@@ -1,4 +1,4 @@
-package tests.fileTests;
+package tests.filetests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
